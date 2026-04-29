@@ -178,3 +178,6 @@ dist/
 dist
 
 node_modules
+
+# Playground
+playground/
