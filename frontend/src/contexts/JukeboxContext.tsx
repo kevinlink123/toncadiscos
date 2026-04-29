@@ -84,7 +84,7 @@ export function JukeboxProvider({ children }: { children: ReactNode }) {
   }, [boxSlug]);
 
   const fetchBoxSongs = useCallback(async () => {
-    if (!boxSlug) return;
+    if (!boxSlug || !box?.id) return;
     setLoading(true);
     try {
       const limit = 20; // You can make this configurable
