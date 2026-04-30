@@ -3,7 +3,7 @@ import fs from "fs";
 import util from "util";
 import db from "./db";
 import { sql } from "kysely";
-import ytdl from "@distube/ytdl-core";
+import youtubedl from 'youtube-dl-exec';
 import { Upload } from "@aws-sdk/lib-storage";
 import { S3 } from "@aws-sdk/client-s3";
 import crypto from "crypto";
@@ -204,6 +204,18 @@ async function getRetryCount(youtube_id: string) {
   return statusRow?.retry_count ?? 0;
 }
 
+function getContentTypeForFormat(format: string): string {
+  switch (format) {
+    case 'opus': return 'audio/opus';
+    case 'mp3': return 'audio/mpeg';
+    case 'aac': return 'audio/aac';
+    case 'm4a': return 'audio/mp4';
+    case 'wav': return 'audio/wav';
+    case 'flac': return 'audio/flac';
+    default: return 'audio/mpeg'; // fallback
+  }
+}
+
 async function workerLoop() {
   while (true) {
     // Uncomment the next line to force an error and test failure emails
@@ -227,34 +239,42 @@ async function workerLoop() {
         );
 
         await (async () => {
+          // Create new abort controller to detect user-triggered abort signals
           const abortController = new AbortController();
+          
           let timeoutId: NodeJS.Timeout | undefined;
           try {
-            const ytdlAgent = PROXY_HOST
-              ? ytdl.createProxyAgent({
-                  uri: `http://${PROXY_USERNAME}${
-                    PROXY_COUNTRY ? `-cc-${PROXY_COUNTRY}` : ""
-                  }:${PROXY_PASSWORD}@${PROXY_HOST}`,
-                })
-              : undefined;
-            const info = await ytdl.getInfo(youtube_id, { agent: ytdlAgent });
-            const format = ytdl.chooseFormat(info.formats, {
-              quality: "highestaudio",
-              filter: "audioonly",
-            });
-            if (!format || !format.mimeType) {
-              throw new Error("No suitable audio format found");
-            }
+            console.log("STARTING PROCESS PAAAAAAA");
+
             let chunkCountReceived = 0;
             const { PassThrough } = await import("stream");
-            const s3Key = `youtube-audio/${youtube_id}.webm`;
+            const s3Key = `youtube-audio/${youtube_id}.m4a`;
+            
+            // Main download and storage in bucket process
             // Await the upload promise so logs and DB update happen after upload completes
             const uploadPromise = new Promise((resolve, reject) => {
-              const stream = ytdl(youtube_id, {
-                quality: "highestaudio",
-                filter: "audioonly",
-                agent: ytdlAgent,
+              const audioFormat = "m4a";
+              const subprocess = youtubedl.exec(youtube_id, {
+                extractAudio: true,
+                audioFormat: audioFormat,
+                audioQuality: 0,
+                output: "-",
+                noWarnings: true,
+                preferFreeFormats: true
               });
+
+              const stream = subprocess.stdout;
+
+              // Checks if the stream exists
+              if (!stream) {
+                reject(new Error(`Couldn't create stream for: ${youtube_id}`));
+                return;
+              }
+
+              subprocess.on("error", (err) => {
+                reject(new Error(`yt-dlp fail: ${err.message}`));
+              });
+
               let inactivityTimeout: NodeJS.Timeout | undefined;
               let startTimeout: NodeJS.Timeout | undefined;
               let receivedFirstData = false;
@@ -312,7 +332,7 @@ async function workerLoop() {
                   Bucket: S3_BUCKET_NAME!,
                   Key: s3Key,
                   Body: pass,
-                  ContentType: "audio/webm",
+                  ContentType: getContentTypeForFormat(audioFormat),
                   ACL: "public-read",
                 },
               });
