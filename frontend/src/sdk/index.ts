@@ -264,17 +264,8 @@ export async function searchYouTube(
 /**
  * Get a signed URL to stream audio-only content for a YouTube video from S3.
  */
-export async function getYouTubeAudioSignedUrl(
+export function getYouTubeAudioStreamUrl(
   videoId: string
-): Promise<
-  paths["/api/youtube/audio"]["get"]["responses"]["200"]["content"]["application/json"]
-> {
-  const params = new URLSearchParams({ videoId });
-  const response = await fetch(`${API_HOST}/api/youtube/audio?${params}`);
-  if (!response.ok) {
-    throw new Error(
-      `Failed to get YouTube audio signed URL: ${response.status} ${response.statusText}`
-    );
-  }
-  return await response.json();
+): string {
+  return `http://localhost:3001/api/youtube/audio?videoId=${videoId}`;
 }

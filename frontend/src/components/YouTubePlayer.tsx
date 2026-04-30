@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play, Pause, SkipForward, SkipBack, Download } from "lucide-react";
 import { useJukebox } from "@/hooks/useJukeboxContext";
-import { updateBoxSong, getYouTubeAudioSignedUrl } from "@/sdk";
+import { updateBoxSong, getYouTubeAudioStreamUrl } from "@/sdk";
 import type { SongRow } from "@/lib/player";
 import { motion } from "framer-motion";
 
@@ -49,11 +49,11 @@ export const YouTubePlayer = () => {
 
     const poll = async () => {
       try {
-        const result = await getYouTubeAudioSignedUrl(currentSong.youtube_id!);
+        const result = getYouTubeAudioStreamUrl(currentSong.youtube_id!);
         if (cancelled || lastPolledIdRef.current !== currentSong.youtube_id)
           return;
-        if (result && result.url) {
-          setMediaUrl(result.url);
+        if (result) {
+          setMediaUrl(result);
           setIsLoading(false);
         } else {
           setIsLoading(true);
@@ -82,9 +82,16 @@ export const YouTubePlayer = () => {
       audioRef.current = newAudio;
     }
 
+
     if (mediaUrl && audioRef.current && audioRef.current.src !== mediaUrl) {
       autoplayAttemptedRef.current = false;
       audioRef.current.src = mediaUrl;
+      const sourceElement = document.createElement('source');
+      sourceElement.src = mediaUrl;
+      sourceElement.type = 'audio/mp4; codecs=mp4a.40.2';  // M4A/AA
+      audioRef.current.innerHTML = '';  // Limpiar fuentes anteriores
+      audioRef.current.appendChild(sourceElement);
+
       setDuration(currentSong?.duration ?? 0);
       setCurrentTime(0);
       setIsPlaying(false);

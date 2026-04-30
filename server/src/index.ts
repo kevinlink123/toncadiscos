@@ -486,7 +486,7 @@ app.get("/api/youtube/audio", async (req, res, _next: NextFunction) => {
     return void res.status(400).json({ error: "Invalid videoId format" });
   }
 
-  const s3Key = `youtube-audio/${videoId}.webm`;
+  const s3Key = `youtube-audio/${videoId}.m4a`;
 
   try {
     // Check if the object exists in S3
@@ -497,9 +497,23 @@ app.get("/api/youtube/audio", async (req, res, _next: NextFunction) => {
       Bucket: S3_BUCKET_NAME,
       Key: s3Key,
     });
-    const url = await getSignedUrl(s3, command, { expiresIn: 604800 });
+    
+    const s3Response = await s3.send(command);
+    res.setHeader("Content-Type", "audio/mp4");
+    res.setHeader("Content-Length", s3Response.ContentLength?.toString() || "0");
+    res.setHeader("Accept-Ranges", "bytes");
 
-    res.json({ url });
+    // TODO: Add cache control to avoid constantly fetching the same resource
+    
+    if(s3Response.Body) {
+      (s3Response.Body as NodeJS.ReadableStream).pipe(res);
+    } else {
+      throw new Error("No body in S3 response");
+    }
+    // TODO: IF ONLY URL IS NOT NEEDED, DELETE THIS COMMENTED LINES
+    // const url = await getSignedUrl(s3, command, { expiresIn: 604800 });
+
+    // res.json({ url });
   } catch (err: any) {
     if (err.name === "NotFound" || err.$metadata?.httpStatusCode === 404) {
       return void res.status(202).json({
