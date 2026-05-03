@@ -1,5 +1,6 @@
 services:
   server:
+    profiles: [backend, full]
     build:
       context: ./server
       dockerfile: Dockerfile.server
@@ -43,6 +44,7 @@ services:
         window: 60s
 
   worker1:
+    profiles: [backend, full]
     build:
       context: ./server
       dockerfile: Dockerfile.youtube-worker
@@ -80,6 +82,7 @@ services:
       retries: 3
 
   worker2:
+    profiles: [backend, full]
     build:
         context: ./server
         dockerfile: Dockerfile.youtube-worker
@@ -117,6 +120,7 @@ services:
       retries: 3
 
   worker3:
+    profiles: [backend, full]
     build:
       context: ./server
       dockerfile: Dockerfile.youtube-worker
@@ -154,6 +158,7 @@ services:
       retries: 3
 
   frontend:
+    profiles: [frontend, full]
     image: skeptrune/jukebox-spa:v0.0.20
     env_file:
       - .env
@@ -164,6 +169,7 @@ services:
     restart: unless-stopped
 
   minio:
+    profiles: [backend, full]
     image: minio/minio:latest
     container_name: minio
     environment:
@@ -178,6 +184,7 @@ services:
     restart: unless-stopped
 
   minio-init:
+    profiles: [backend, full]
     image: minio/mc:latest
     depends_on:
       - minio
