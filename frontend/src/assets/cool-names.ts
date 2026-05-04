@@ -1,4 +1,13 @@
 export const names = [
+  "Tropitango",
+  "Tussiwarrior",
+  "Toncaneitor",
+  "Pianta",
+  "Pianta pero Largo",
+  "Pelado",
+  "Waisman",
+  "Aguirre",
+  "Aguirre pero Pingon",
   "Sonic Sanctuary",
   "The Beat Box",
   "Melody Machine",

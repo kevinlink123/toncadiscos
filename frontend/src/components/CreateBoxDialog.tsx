@@ -24,7 +24,7 @@ export function CreateBoxDialog({
   onCreate,
   defaultName = "",
   triggerClassName = "sm:text-xl hover:cursor-pointer",
-  triggerText = "Create Jukebox",
+  triggerText = "Crear Toncadisco",
 }: CreateBoxDialogProps) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(defaultName);
@@ -61,12 +61,12 @@ export function CreateBoxDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new jukebox</DialogTitle>
-          <DialogDescription>Enter a name for your jukebox.</DialogDescription>
+          <DialogTitle>Crear un nuevo Toncadisco</DialogTitle>
+          <DialogDescription>Elegi un nombre para tu Toncadisco.</DialogDescription>
         </DialogHeader>
         <div className="mt-4">
           <Input
-            placeholder="Jukebox name"
+            placeholder="Nombre de Tonca"
             value={name}
             onChange={(e) => setName(e.currentTarget.value)}
             onKeyDown={(e) => {
@@ -79,10 +79,10 @@ export function CreateBoxDialog({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="neutral">Cancel</Button>
+            <Button variant="neutral">Cancelar</Button>
           </DialogClose>
           <Button onClick={handleSubmit} disabled={isCreating || !name}>
-            {isCreating ? "Creating…" : "Create"}
+            {isCreating ? "Creando…" : "Crear"}
           </Button>
         </DialogFooter>
       </DialogContent>

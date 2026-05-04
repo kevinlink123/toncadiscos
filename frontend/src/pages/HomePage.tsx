@@ -59,7 +59,7 @@ export default function HomePage() {
                 }}
               >
                 <Star className="h-4 w-4" />
-                100% free no ads!
+                100% gratarola y sin ads de mierda!
                 <Sparkles className="h-4 w-4" />
               </div>
               <div className="flex flex-col items-center w-full">
@@ -83,12 +83,12 @@ export default function HomePage() {
                 }}
               >
                 <Star className="h-4 w-4" />
-                100% free no ads!
+                100% gratarola y sin ads de mierda!
                 <Sparkles className="h-4 w-4" />
               </div>
               <h1 className="my-8 text-3xl font-bold leading-tight text-foreground sm:text-5xl sm:leading-tight md:my-0 md:text-6xl lg:text-7xl lg:leading-tight w-fit">
-                Turn your phone <br className="hidden md:block" />
-                into a <SparkleText>jukebox</SparkleText>
+                Spotify jam me<br className="hidden md:block" />
+                <SparkleText>chupa la pija</SparkleText>
               </h1>
               {/* Feature List (desktop only) */}
               <div className="mt-8 flex-col items-start gap-2 md:flex">
@@ -96,34 +96,33 @@ export default function HomePage() {
                   <span className="mr-2" role="img" aria-label="open-source">
                     🌐
                   </span>
-                  Open source alternative to Spotify's Collaborative Playlists
+                  Toncadiscos es la alternativa open source a Spotify Jam
                 </p>
                 <p className="text-md flex items-center">
                   <span className="mr-2" role="img" aria-label="anonymous">
                     🕵️
                   </span>
-                  Anonymous accounts: no sign up or email needed
+                  Cuenas anonimas: Ni mail ni nada, funciona sin inscribirte a nada
                 </p>
                 <p className="text-md flex items-center">
                   <span className="mr-2" role="img" aria-label="sparkles">
                     ✨
                   </span>
-                  Share a link, add songs together
+                  Comopartis el link y tuki, arranca a agregar canciones
                 </p>
                 <p className="text-md flex items-center">
                   <span className="mr-2" role="img" aria-label="rocket">
                     🚀
                   </span>
-                  No app download or login required
+                  Sin instalar nada ni inscribrse a nada (<b><i>sacala del angulo spotify</i></b>)
                 </p>
               </div>
             </div>
           </div>
           {/* Right: Portrait Video Card with CTA below video */}
           <Card className="flex-[1] flex flex-col items-center justify-center p-4 sm:p-8 bg-white rounded-2xl shadow-md w-full max-w-[400px] gap-0">
-            <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4 text-center">
-              Create a box and share a link for your friends to join and add
-              songs.
+            <h2 className="text-xl md:text-xl font-semibold text-foreground mb-4 text-center">
+              Crea un "Toncadisco" y comparti el link a otros para que puedan unirse y agregar canciones a la playlist.
             </h2>
             <div className="w-full justify-center flex">
               <CreateBoxDialog
@@ -154,33 +153,33 @@ export default function HomePage() {
           items={[
             // Each item is a container element with icon and text
             <span key="collab" className="flex items-center gap-2">
-              Collaborative playlists
+              Playlist Colaborativas
               <CircleBallIcon className="inline-block align-middle text-foreground lg:w-[50px] lg:h-[50px] md:w-10 md:h-10 w-[30px] h-[30px] mx-2" />
             </span>,
             <span key="noapp" className="flex items-center gap-2">
-              No app required
+              Sin instalar ninguna app
               <FanIcon
                 className="inline-block align-middle mx-2"
                 style={{ width: 40, height: 40, verticalAlign: "middle" }}
               />
             </span>,
             <span key="addsongs" className="flex items-center gap-2">
-              Add songs from your phone
+              Agrega canciones desde tu telefono
               <SpikeIcon className="inline-block align-middle text-foreground lg:w-[50px] lg:h-[50px] md:w-10 md:h-10 w-[30px] h-[30px] mx-2" />
             </span>,
             <span key="free" className="flex items-center gap-2">
-              100% free, no ads!
+              100% gratis, sin ads!
               <CircleBallIcon className="inline-block align-middle text-foreground lg:w-[50px] lg:h-[50px] md:w-10 md:h-10 w-[30px] h-[30px] mx-2" />
             </span>,
             <span key="share" className="flex items-center gap-2">
-              Share a link, start the party
+              Comparti el link, deja de pelear por el aux
               <FanIcon
                 className="inline-block align-middle mx-2"
                 style={{ width: 40, height: 40, verticalAlign: "middle" }}
               />
             </span>,
             <span key="queue" className="flex items-center gap-2">
-              Queue up music together
+              Todos eligen canciones!
               <SpikeIcon className="inline-block align-middle text-foreground lg:w-[50px] lg:h-[50px] md:w-10 md:h-10 w-[30px] h-[30px] mx-2" />
             </span>,
           ]}
@@ -192,61 +191,46 @@ export default function HomePage() {
           id="faq"
           className="text-3xl md:text-4xl font-bold mb-8 text-center"
         >
-          Frequently asked questions
+          Preguntas Frecuentes
         </h2>
         <div className="w-full max-w-xl flex flex-col gap-4">
           <Accordion type="single" collapsible className="flex flex-col gap-4">
             <AccordionItem value="item-1">
               <AccordionTrigger className="bg-main text-black font-semibold">
-                Do I need to create an account to use Jukebox?
+                Como nacio este proyecto?
               </AccordionTrigger>
               <AccordionContent>
-                No account or login is required to create or join a jukebox.
-                Just create a box and share the link with your friends!
+                Toncadiscos es un fork del proyecto {" "}
+                <a className="underline" href="https://github.com/skeptrunedev/jukebox">Jukebox.</a>{" "}
+                Queria una alternativa autohosteable a Spotify Jam pero el creador original abandono el desarrollo del mismo hace un tiempo,
+                asi que hice un fork y empece a resolver los probemas existentes y a agregar features nuevas.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger className="bg-main text-black font-semibold">
-                Which songs are available?
+                Necesito una cuenta para usar Toncadiscos?
               </AccordionTrigger>
               <AccordionContent>
-                Pretty much anything you can find on YouTube or Spotify is
-                available to play. The exact source is a secret, but if you can
-                find it on those platforms, you can probably queue it here!
+                No hace falta ninguna cuenta para crear o entrar a un Toncadisco.
+                Simplemente crea un Toncadiscos y comparti el link!
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger className="bg-main text-black font-semibold">
-                How can I contact you about feature requests?
+                Que canciones estan disponibles?
               </AccordionTrigger>
               <AccordionContent>
-                You can reach out by DMing me on{" "}
-                <a
-                  href="https://twitter.com/skeptrun"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-blue-600 hover:text-blue-800"
-                >
-                  X (formerly Twitter) @skeptrune
-                </a>
-                . I love hearing your ideas and feedback!
+                Practicamente todo lo que este en Youtube. Si existe en YT, se puede agregar a la cola!
+                En un futuro se implementara tambien Spotify como fuente de canciones.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger className="bg-main text-black font-semibold">
-                How to contribute?
+                Tenes alguna idea que quieras agregar?
               </AccordionTrigger>
               <AccordionContent>
-                Open an issue or pull request on{" "}
-                <a
-                  href="https://github.com/skeptrunedev/jukebox"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline text-blue-600 hover:text-blue-800"
-                >
-                  GitHub
-                </a>
-                ! Contributions, suggestions, and improvements are welcome.
+                Hacemelo saber para poder implementarla! Como alternativa podes forkear este proyecto o el proyecto original {" "}
+                <a className="underline" href="https://github.com/skeptrunedev/jukebox">Jukebox</a>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -259,13 +243,13 @@ export default function HomePage() {
           <div className="flex items-center mb-4">
             <CircleBallIcon className="mr-4 w-10 h-10 text-black" />
             <span id="who-made-this" className="text-2xl font-bold text-black">
-              Who made this?
+              Quien es el creador del proyecto?
             </span>
           </div>
           <p className="text-lg text-black">
-            My name is Nick, I love creating software. Spotify's collaborative
-            playlists are great, but not everyone has Spotify (including me) so
-            I needed something different.
+            El creador original del proyecto Jukebox es <b>Skeptrune</b> (Nick Khami), Toncadiscos es un fork que hice
+            para poder reparar errores, actualizar librerias y re-escribir logicas para que el proyecto funcione correctamente.
+            Tambien cree features nuevas y en un futuro se agregaran otras mas.
           </p>
         </div>
         {/* Square 2: Open Source */}
@@ -277,9 +261,7 @@ export default function HomePage() {
             </span>
           </div>
           <p className="text-lg text-black">
-            I have some ideas for where this could go! Maybe adding a song could
-            be a "paid" feature for businesses to use it like a real jukebox.
-            It's open in case someone else has ideas they want to implement.
+            Tanto este proyecto como el original son Open Source, asi que cualquiera puede usarlos como prefiera.
           </p>
         </div>
         {/* Square 3: What does this do? */}
@@ -290,13 +272,14 @@ export default function HomePage() {
               id="what-does-this-do"
               className="text-2xl font-bold text-black"
             >
-              What does this do?
+              Para que sirve Toncadiscos?
             </span>
           </div>
           <p className="text-lg text-black">
-            Right now it's really simple and tiny, kind of a toy project. You
-            can create a "box" and then send your friends a link to add songs or
-            do it yourself.
+            Es un proyecto relativamente pequeño para crear "Toncadiscos", colas colaborativas donde varias personas 
+            pueden agregar canciones a una cola desde cualquier dispositivo que tenga el link del Toncadisco.
+            El creador del Toncadisco puede reproducir, pausar, reorganizar el orden de las canciones y cambiar la
+            cancion actual reproduciendose. Los demas usuarios podran agregar canciones.
           </p>
         </div>
         {/* Square 4: Is it fair if I have a large group? */}
@@ -307,199 +290,16 @@ export default function HomePage() {
               id="fair-for-large-group"
               className="text-2xl font-bold text-black"
             >
-              Is it fair if I have a large group?
+              Que pasa si son una banda de personas?
             </span>
           </div>
           <p className="text-lg text-black">
-            Yes! When songs get added to the queue, they're automatically sorted
-            in a fair order. If person A adds two songs and person B adds one,
-            B's song goes between A's. Scales infinitely!
+            Se usa un pequeño sistema de cola justa, si la persona A agrega dos canciones y una persona B  
+            agrega una cancion, dicha cancion de B se coloca entre las dos de A. Esto escala infinitamente
+            {"(creo jaja)"}
           </p>
         </div>
       </div>
-      {/* Changelog Section */}
-      <div className="w-full flex flex-col items-center py-16 border-t-4 px-5">
-        <Card className="w-full max-w-xl p-8 bg-white border-2 border-black shadow-md">
-          <h2
-            id="changelog"
-            className="text-3xl md:text-4xl font-bold mb-8 text-center"
-          >
-            Changelog
-          </h2>
-          <div className="space-y-8">
-            <div>
-              <h3
-                id="changelog-v0-0-17"
-                className="text-2xl font-semibold mb-2"
-              >
-                v0.0.17 (2025-07-08)
-              </h3>
-              <ul className="list-disc list-inside text-lg ml-4">
-                <li>
-                  ✨ Enhanced <b>SongSearch</b> and <b>YouTubePlayer</b>{" "}
-                  components with additional state management and UI updates
-                </li>
-                <li>
-                  🐳 Updated Docker images to <b>v0.0.16</b>, <b>v0.0.15</b>,{" "}
-                  <b>v0.0.14</b>, <b>v0.0.13</b>, <b>v0.0.12</b>, <b>v0.0.8</b>
-                </li>
-                <li>
-                  ⏱️ Adjusted debounce time in <b>SongSearch</b> for improved
-                  responsiveness
-                </li>
-                <li>
-                  📧 Added <b>SMTP email notifications</b> for YouTube search
-                  failures
-                </li>
-                <li>
-                  🎬 Replaced YouTube video with <b>Vimeo</b> in HomePage
-                </li>
-                <li>
-                  🖼️ Added logo image to <b>README</b> for enhanced visual
-                  appeal
-                </li>
-                <li>
-                  🛠️ Enhanced <b>layout</b> component with box context and save
-                  icon
-                </li>
-                <li>
-                  🚫 Prevented editing box name on <b>SharePage</b>
-                </li>
-                <li>
-                  📱 Improved drag-and-drop song list behavior for mobile touch
-                </li>
-                <li>🐞 Fixed bug when all songs are marked as played</li>
-                <li>
-                  🔄 Reset playback state in <b>YouTubePlayer</b> and refined
-                  initial song index logic
-                </li>
-                <li>🧹 Refined HomePage text and styles</li>
-                <li>
-                  🤖 Added <b>robots.txt</b>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 id="changelog-v0-0-4" className="text-2xl font-semibold mb-2">
-                v0.0.4 (2025-07-01)
-              </h3>
-              <ul className="list-disc list-inside text-lg ml-4">
-                <li>
-                  📧 Added <b>SMTP email notifications</b> for upload success
-                  and failure
-                </li>
-                <li>
-                  🛠️ Updated <b>.env.dist</b> and package dependencies
-                </li>
-                <li>
-                  🆕 <b>Box update endpoint</b> now accepts <b>slug</b> or{" "}
-                  <b>id</b> and has improved error handling
-                </li>
-                <li>
-                  📊 Added <b>Plausible Analytics</b> for privacy-friendly usage
-                  stats
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 id="changelog-v0-0-3" className="text-2xl font-semibold mb-2">
-                v0.0.3 (2025-07-01)
-              </h3>
-              <ul className="list-disc list-inside text-lg ml-4">
-                <li>
-                  ❤️ Added <b>healthchecks</b> to server and worker services for
-                  better reliability
-                </li>
-                <li>
-                  🔁 Ensured <b>server</b> and <b>worker</b> auto-restart via
-                  Docker Compose for easier deployment and maintenance
-                </li>
-                <li>
-                  🛠️ Improved environment variable management and added worker
-                  configurations for <b>worker1</b>, <b>worker2</b>, and{" "}
-                  <b>worker3</b>
-                </li>
-                <li>
-                  🚀 Added <b>redeploy script</b> for streamlined updates
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 id="changelog-v0-0-2" className="text-2xl font-semibold mb-2">
-                v0.0.2 (2025-06-30)
-              </h3>
-              <ul className="list-disc list-inside text-lg ml-4">
-                <li>
-                  ✨ Enhanced UI with <b>framer-motion</b> animations for a
-                  smoother experience in PlayPage and SharePage
-                </li>
-                <li>
-                  ☁️ Added <b>MinIO S3</b> support in Docker Compose—no external
-                  S3 needed for VPS deployments
-                </li>
-                <li>
-                  🔄 Streamlined S3 upload process and improved error handling
-                  in YouTube worker
-                </li>
-                <li>
-                  📄 Updated README with new features, usage instructions, and
-                  badges for Docker pulls, GitHub stars, and social media
-                </li>
-                <li>
-                  🐳 Improved Docker Compose for better service image management
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 id="changelog-v0-0-1" className="text-2xl font-semibold mb-2">
-                v0.0.1 (2025-06-30)
-              </h3>
-              <ul className="list-disc list-inside text-lg ml-4">
-                <li>
-                  🎵 YouTube Integration: Search and add songs directly from
-                  YouTube
-                </li>
-                <li>
-                  📱 Collaborative Playlists: Multiple users can add songs to
-                  shared jukeboxes
-                </li>
-                <li>
-                  🎮 Built-in Player: Stream music via embedded YouTube player
-                </li>
-                <li>🔍 Smart Search: Search YouTube's vast music library</li>
-                <li>
-                  📊 Playlist Management: Organize and manage your music
-                  collections
-                </li>
-                <li>
-                  🖥️ <b>Frontend</b>: React + TypeScript + Vite app for a
-                  modern, responsive UI
-                </li>
-                <li>
-                  🗄️ <b>Server</b>: Node.js + Express + TypeScript backend with
-                  REST API and OpenAPI/Swagger docs
-                </li>
-                <li>
-                  ⚙️ <b>Worker</b>: Dedicated YouTube audio worker for
-                  background processing
-                </li>
-                <li>💾 SQLite database with Kysely query builder</li>
-                <li>
-                  🔗 Anonymous, no-login usage—just create a box and share a
-                  link
-                </li>
-                <li>🆓 100% free, no ads, open source (MIT License)</li>
-                <li>🌐 Docker support for easy deployment</li>
-                <li>
-                  📦 Initial release of all core services: server, worker, and
-                  frontend
-                </li>
-              </ul>
-            </div>
-          </div>
-        </Card>
-      </div>
-      {/* End Changelog Section */}
     </div>
   );
 }
