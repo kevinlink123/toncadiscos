@@ -1,0 +1,24 @@
+{
+  "name": "jukebox",
+  "version": "1.0.0",
+  "description": "Toncadiscos is a Jukebox's fork that updated libraries and logic to be used correctly.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docker:backend": "sudo docker compose --profile backend up -d --build",
+    "docker:full": "sudo docker compose --profile full up -d --build",
+    "docker:down": "sudo docker compose --profile full down",
+    "docker:db": "sudo docker cp jukebox-server-1:/data/dev.sqlite3 /home/kevin/Documents/projects/docker/jukebox/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinlink123/toncadiscos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kevinlink123/toncadiscos/issues"
+  },
+  "homepage": "https://github.com/kevinlink123/toncadiscos#readme"
+}
