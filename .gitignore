@@ -181,3 +181,7 @@ node_modules
 
 # Playground
 playground/
+
+#Cookies file
+cookies.firefox-private.txt
+cookies.txt

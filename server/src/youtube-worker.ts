@@ -5,12 +5,16 @@ import db from "./db";
 import ERROR_MESSAGES from "./constants";
 
 import { sql } from "kysely";
-import youtubedl from 'youtube-dl-exec';
+import { create } from 'youtube-dl-exec';
 import { Upload } from "@aws-sdk/lib-storage";
 import { S3 } from "@aws-sdk/client-s3";
 import crypto from "crypto";
 import http from "http";
 import nodemailer from "nodemailer";
+
+// Custom yt-dlp binary usage setup
+const youtubedl = create("/usr/local/bin/yt-dlp");
+
 // SMTP email sender setup
 const smtpTransport = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
@@ -256,25 +260,47 @@ async function workerLoop() {
             // Await the upload promise so logs and DB update happen after upload completes
             const uploadPromise = new Promise((resolve, reject) => {
               const audioFormat = "m4a";
-              const subprocess = youtubedl.exec(youtube_id, {
+              const youtubeFullUrl = `https://www.youtube.com/watch?v=${youtube_id}`;
+              const subprocess = youtubedl.exec(youtubeFullUrl, {
                 extractAudio: true,
                 audioFormat: audioFormat,
                 audioQuality: 0,
                 output: "-",
                 noWarnings: true,
-                preferFreeFormats: true
+                preferFreeFormats: true,
+                sleepInterval: 5,
+                maxSleepInterval: 10,
+                cookies: "/app/cookies.txt",
+                jsRuntimes: "node",
+                remoteComponent: "ejs:github"
               });
 
               const stream = subprocess.stdout;
+              // Stderr buffer for yt-dlp subprocess
+              let stderrBuffer = "";
 
               // Checks if the stream exists
               if (!stream) {
                 reject(new Error(`Couldn't create stream for: ${youtube_id}`));
                 return;
               }
+              if (subprocess.stderr) {
+                subprocess.stderr.on("data", (data) => {
+                  stderrBuffer += data.toString();
+                });
+              }
 
               subprocess.on("error", (err) => {
                 reject(new Error(`yt-dlp fail: ${err.message}`));
+              });
+
+              subprocess.on("close", (code, signal) => {
+                  if (code !== 0) {
+                    // Este es el error que llegará al catch principal
+                    const errorMessage = stderrBuffer || `yt-dlp exited with code ${code}`;
+                    console.error(`yt-dlp closed with code ${code}, signal ${signal}`);
+                    reject(new Error(errorMessage));
+                  }
               });
 
               let inactivityTimeout: NodeJS.Timeout | undefined;

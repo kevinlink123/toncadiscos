@@ -74,6 +74,7 @@ services:
     volumes:
       - sqlite_data:/data
       - logsink_data:/logsinks
+      - ./cookies.txt:/app/cookies.txt
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${WORKER1_INTERNAL_PORT}/health"]
@@ -82,7 +83,7 @@ services:
       retries: 3
 
   worker2:
-    profiles: [backend, full]
+    profiles: [full]
     build:
         context: ./server
         dockerfile: Dockerfile.youtube-worker
@@ -112,6 +113,7 @@ services:
     volumes:
       - sqlite_data:/data
       - logsink_data:/logsinks
+      - ./cookies.txt:/app/cookies.txt
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${WORKER2_INTERNAL_PORT}/health"]
@@ -120,7 +122,7 @@ services:
       retries: 3
 
   worker3:
-    profiles: [backend, full]
+    profiles: [full]
     build:
       context: ./server
       dockerfile: Dockerfile.youtube-worker
@@ -150,6 +152,7 @@ services:
     volumes:
       - sqlite_data:/data
       - logsink_data:/logsinks
+      - ./cookies.txt:/app/cookies.txt
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${WORKER3_INTERNAL_PORT}/health"]
