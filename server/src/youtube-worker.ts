@@ -2,6 +2,8 @@ import "dotenv/config";
 import fs from "fs";
 import util from "util";
 import db from "./db";
+import ERROR_MESSAGES from "./constants";
+
 import { sql } from "kysely";
 import youtubedl from 'youtube-dl-exec';
 import { Upload } from "@aws-sdk/lib-storage";
@@ -408,6 +410,12 @@ async function workerLoop() {
         })();
       } catch (err: any) {
         console.error("Download/upload error for", youtube_id, err);
+        let sanitizedErrMsg = (err?.message?.toString() || String(err)) as string;
+        if(sanitizedErrMsg.includes(ERROR_MESSAGES.authCookiesError)) {
+          //Auth error, should use cookies
+          sanitizedErrMsg = ERROR_MESSAGES.authCookiesError;
+        }
+
         const statusRow = await db
           .selectFrom("song_youtube_status")
           .select(["retry_count"])
@@ -422,7 +430,7 @@ async function workerLoop() {
               status: "pending",
               retry_count: currentRetry + 1,
               updated_at: new Date().toISOString(),
-              error_message: err?.message?.toString() || String(err),
+              error_message: sanitizedErrMsg,
             })
             .where("youtube_id", "=", youtube_id)
             .where("status", "=", "processing")
@@ -433,7 +441,7 @@ async function workerLoop() {
             .set({
               status: "failed",
               updated_at: new Date().toISOString(),
-              error_message: err?.message?.toString() || String(err),
+              error_message: sanitizedErrMsg,
             })
             .where("youtube_id", "=", youtube_id)
             .where("status", "=", "processing")
