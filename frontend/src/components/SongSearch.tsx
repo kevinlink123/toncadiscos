@@ -137,7 +137,7 @@ export default function SongSearch({ onSongSelect }: SongSearchProps) {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             id="song-search"
-            placeholder="Search for songs on YouTube..."
+            placeholder="Busca tu cancion en Youtube..."
             value={query}
             onChange={handleInputChange}
           />
@@ -174,7 +174,7 @@ export default function SongSearch({ onSongSelect }: SongSearchProps) {
             transition={{ duration: 0.3 }}
             className="space-y-2"
           >
-            <h3 className="font-semibold text-lg">Search Results</h3>
+            <h3 className="font-semibold text-lg">Resultados de busqueda</h3>
             <div className="grid gap-3 max-h-96 overflow-y-auto scrollbar">
               <AnimatePresence>
                 {results
@@ -236,7 +236,7 @@ export default function SongSearch({ onSongSelect }: SongSearchProps) {
                               ) : (
                                 <Plus className="h-3 w-3" />
                               )}
-                              {addingIds.has(result.id) ? "Adding..." : "Add"}
+                              {addingIds.has(result.id) ? "Agreganding..." : "Agregar"}
                             </Button>
                           </div>
                         </CardContent>

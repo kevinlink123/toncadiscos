@@ -455,10 +455,9 @@ export const YouTubePlayer = () => {
                       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                       className="text-center text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-200 mt-4"
                     >
-                      <p className="font-medium">Ready to play!</p>
+                      <p className="font-medium">Listo para reproducir!</p>
                       <p>
-                        Click the play button above to start listening to your
-                        jukebox.
+                        Clickea el boton de reproduccion arriba para arrancar la cola
                       </p>
                     </motion.div>
                   )}

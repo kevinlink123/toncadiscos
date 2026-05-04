@@ -77,9 +77,9 @@ export default function PlayPage() {
           <Card className="bg-white text-foreground">
             <CardContent>
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Share this Jukebox</h3>
+                <h3 className="text-lg font-semibold">Comparti el Toncadisco</h3>
                 <p className="text-sm text-muted-foreground">
-                  Share this link so others can add songs to this jukebox
+                  Comparti este link a otros para que puedan agregar canciones a la cola!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center w-full max-w-full">
                   <span
@@ -122,9 +122,9 @@ export default function PlayPage() {
           <Card className="bg-white text-foreground">
             <CardContent>
               <div className="space-y-3">
-                <h3 className="text-lg font-semibold">Add Songs</h3>
+                <h3 className="text-lg font-semibold">Agregar Canciones</h3>
                 <p className="text-sm text-muted-foreground">
-                  Search for songs on YouTube to add to your jukebox
+                  Usa el buscador para encontrar canciones en Youtube para agregarlas al Toncadisco
                 </p>
                 <SongSearch onSongSelect={addSong} />
               </div>
@@ -163,7 +163,7 @@ export default function PlayPage() {
 const columns: Column<SongRow>[] = [
   { header: "#", cell: (r) => r.position },
   {
-    header: "Title",
+    header: "Titulo",
     cell: (r: SongRow) => (
       <div className="flex items-center gap-2">
         <span
@@ -174,7 +174,7 @@ const columns: Column<SongRow>[] = [
     ),
   },
   {
-    header: "Artist",
+    header: "Artista",
     cell: (r: SongRow) => (
       <div className="flex items-center gap-2">
         <span
@@ -185,16 +185,16 @@ const columns: Column<SongRow>[] = [
     ),
   },
   {
-    header: "Duration",
+    header: "Duracion",
     cell: (r: SongRow) =>
       new Date((r.duration ?? 0) * 1000).toISOString().slice(14, 19),
   },
   {
-    header: "Added By",
+    header: "Agregado por",
     cell: (r) => r.user.username || "Unknown",
   },
   {
-    header: "Status",
+    header: "Estado Actual",
     cell: (r: SongRow) => (
       <div className="flex items-center gap-2">
         {r.status === "playing" && <Play className="w-4 h-4 text-green-500" />}
