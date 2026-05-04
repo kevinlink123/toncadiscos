@@ -49,10 +49,10 @@ export function ProfilePage() {
       <Card className="bg-white w-full max-w-2xl">
         <CardHeader className="text-center">
           <CardTitle className="text-4xl md:text-6xl font-bold text-foreground mb-4">
-            Your Profile
+            Tu Perfil
           </CardTitle>
           <CardDescription className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-            This is how you'll appear to other users.
+            Asi es como apareces ante los demas usuarios.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -62,7 +62,7 @@ export function ProfilePage() {
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-700 text-left"
               >
-                Username
+                Nombre de Usuario
               </label>
               <Input
                 id="username"
@@ -77,7 +77,7 @@ export function ProfilePage() {
               disabled={isUpdating}
               className="w-full"
             >
-              {isUpdating ? "Updating..." : "Update Username"}
+              {isUpdating ? "Actualizando..." : "Actualizar Nombre de Usuario"}
             </Button>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             {success && (
